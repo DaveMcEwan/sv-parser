@@ -1,15 +1,17 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CaseStatement {
     Normal(Box<CaseStatementNormal>),
     Matches(Box<CaseStatementMatches>),
     Inside(Box<CaseStatementInside>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseStatementNormal {
     pub nodes: (
         Option<UniquePriority>,
@@ -21,7 +23,7 @@ pub struct CaseStatementNormal {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseStatementMatches {
     pub nodes: (
         Option<UniquePriority>,
@@ -34,7 +36,7 @@ pub struct CaseStatementMatches {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseStatementInside {
     pub nodes: (
         Option<UniquePriority>,
@@ -47,41 +49,41 @@ pub struct CaseStatementInside {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CaseKeyword {
     Case(Box<Keyword>),
     Casez(Box<Keyword>),
     Casex(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseExpression {
     pub nodes: (Expression,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CaseItem {
     NonDefault(Box<CaseItemNondefault>),
     Default(Box<CaseItemDefault>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseItemNondefault {
     pub nodes: (List<Symbol, CaseItemExpression>, Symbol, StatementOrNull),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseItemDefault {
     pub nodes: (Keyword, Option<Symbol>, StatementOrNull),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CasePatternItem {
     NonDefault(Box<CasePatternItemNondefault>),
     Default(Box<CaseItemDefault>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CasePatternItemNondefault {
     pub nodes: (
         Pattern,
@@ -91,38 +93,38 @@ pub struct CasePatternItemNondefault {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CaseInsideItem {
     NonDefault(Box<CaseInsideItemNondefault>),
     Default(Box<CaseItemDefault>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseInsideItemNondefault {
     pub nodes: (OpenRangeList, Symbol, StatementOrNull),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseItemExpression {
     pub nodes: (Expression,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct RandcaseStatement {
     pub nodes: (Keyword, RandcaseItem, Vec<RandcaseItem>, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct RandcaseItem {
     pub nodes: (Expression, Symbol, StatementOrNull),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct OpenRangeList {
     pub nodes: (List<Symbol, OpenValueRange>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct OpenValueRange {
     pub nodes: (ValueRange,),
 }

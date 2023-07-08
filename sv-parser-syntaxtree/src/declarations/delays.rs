@@ -1,19 +1,21 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum Delay3 {
     Single(Box<Delay3Single>),
     Mintypmax(Box<Delay3Mintypmax>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Delay3Single {
     pub nodes: (Symbol, DelayValue),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Delay3Mintypmax {
     pub nodes: (
         Symbol,
@@ -28,18 +30,18 @@ pub struct Delay3Mintypmax {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum Delay2 {
     Single(Box<Delay2Single>),
     Mintypmax(Box<Delay2Mintypmax>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Delay2Single {
     pub nodes: (Symbol, DelayValue),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Delay2Mintypmax {
     pub nodes: (
         Symbol,
@@ -47,7 +49,7 @@ pub struct Delay2Mintypmax {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum DelayValue {
     UnsignedNumber(Box<UnsignedNumber>),
     RealNumber(Box<RealNumber>),

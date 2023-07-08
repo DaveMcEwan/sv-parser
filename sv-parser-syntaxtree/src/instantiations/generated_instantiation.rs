@@ -1,13 +1,15 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct GenerateRegion {
     pub nodes: (Keyword, Vec<GenerateItem>, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LoopGenerateConstruct {
     pub nodes: (
         Keyword,
@@ -22,45 +24,45 @@ pub struct LoopGenerateConstruct {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct GenvarInitialization {
     pub nodes: (Option<Genvar>, GenvarIdentifier, Symbol, ConstantExpression),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Genvar {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum GenvarIteration {
     Assignment(Box<GenvarIterationAssignment>),
     Prefix(Box<GenvarIterationPrefix>),
     Suffix(Box<GenvarIterationSuffix>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct GenvarIterationAssignment {
     pub nodes: (GenvarIdentifier, AssignmentOperator, GenvarExpression),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct GenvarIterationPrefix {
     pub nodes: (IncOrDecOperator, GenvarIdentifier),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct GenvarIterationSuffix {
     pub nodes: (GenvarIdentifier, IncOrDecOperator),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ConditionalGenerateConstruct {
     If(Box<IfGenerateConstruct>),
     Case(Box<CaseGenerateConstruct>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IfGenerateConstruct {
     pub nodes: (
         Keyword,
@@ -70,7 +72,7 @@ pub struct IfGenerateConstruct {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseGenerateConstruct {
     pub nodes: (
         Keyword,
@@ -80,29 +82,29 @@ pub struct CaseGenerateConstruct {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CaseGenerateItem {
     Nondefault(Box<CaseGenerateItemNondefault>),
     Default(Box<CaseGenerateItemDefault>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseGenerateItemNondefault {
     pub nodes: (List<Symbol, ConstantExpression>, Symbol, GenerateBlock),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CaseGenerateItemDefault {
     pub nodes: (Keyword, Option<Symbol>, GenerateBlock),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum GenerateBlock {
     GenerateItem(Box<GenerateItem>),
     Multiple(Box<GenerateBlockMultiple>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct GenerateBlockMultiple {
     pub nodes: (
         Option<(GenerateBlockIdentifier, Symbol)>,
@@ -114,7 +116,7 @@ pub struct GenerateBlockMultiple {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum GenerateItem {
     ModuleOrGenerateItem(Box<ModuleOrGenerateItem>),
     InterfaceOrGenerateItem(Box<InterfaceOrGenerateItem>),

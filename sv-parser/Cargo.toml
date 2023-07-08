@@ -32,6 +32,7 @@ sv-parser-error      = {version = "^0.13.1", path = "../sv-parser-error"}
 sv-parser-parser     = {version = "^0.13.1", path = "../sv-parser-parser"}
 sv-parser-pp         = {version = "^0.13.1", path = "../sv-parser-pp"}
 sv-parser-syntaxtree = {version = "^0.13.1", path = "../sv-parser-syntaxtree"}
+serde = { version="1", features = ["derive"] }
 
 [dev-dependencies]
 structopt = "0.3.2"

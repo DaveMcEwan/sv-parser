@@ -1,19 +1,21 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum StatementOrNull {
     Statement(Box<Statement>),
     Attribute(Box<StatementOrNullAttribute>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct StatementOrNullAttribute {
     pub nodes: (Vec<AttributeInstance>, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Statement {
     pub nodes: (
         Option<(BlockIdentifier, Symbol)>,
@@ -22,7 +24,7 @@ pub struct Statement {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum StatementItem {
     BlockingAssignment(Box<(BlockingAssignment, Symbol)>),
     NonblockingAssignment(Box<(NonblockingAssignment, Symbol)>),
@@ -46,23 +48,23 @@ pub enum StatementItem {
     ExpectPropertyStatement(Box<ExpectPropertyStatement>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct FunctionStatement {
     pub nodes: (Statement,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum FunctionStatementOrNull {
     Statement(Box<FunctionStatement>),
     Attribute(Box<FunctionStatementOrNullAttribute>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct FunctionStatementOrNullAttribute {
     pub nodes: (Vec<AttributeInstance>, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct VariableIdentifierList {
     pub nodes: (List<Symbol, VariableIdentifier>,),
 }

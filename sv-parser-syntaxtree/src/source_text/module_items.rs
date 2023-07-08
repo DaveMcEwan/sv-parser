@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ElaborationSystemTask {
     TaskFatal(Box<ElaborationSystemTaskFatal>),
     TaskError(Box<ElaborationSystemTaskError>),
@@ -10,7 +12,7 @@ pub enum ElaborationSystemTask {
     TaskInfo(Box<ElaborationSystemTaskInfo>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ElaborationSystemTaskFatal {
     pub nodes: (
         Keyword,
@@ -19,29 +21,29 @@ pub struct ElaborationSystemTaskFatal {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ElaborationSystemTaskError {
     pub nodes: (Keyword, Option<Paren<Option<ListOfArguments>>>, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ElaborationSystemTaskWarning {
     pub nodes: (Keyword, Option<Paren<Option<ListOfArguments>>>, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ElaborationSystemTaskInfo {
     pub nodes: (Keyword, Option<Paren<Option<ListOfArguments>>>, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum FinishNumber {
     Zero(Box<Symbol>),
     One(Box<Symbol>),
     Two(Box<Symbol>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ModuleCommonItem {
     ModuleOrGenerateItemDeclaration(Box<ModuleOrGenerateItemDeclaration>),
     InterfaceInstantiation(Box<InterfaceInstantiation>),
@@ -58,13 +60,13 @@ pub enum ModuleCommonItem {
     ElaborationSystemTask(Box<ElaborationSystemTask>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ModuleItem {
     PortDeclaration(Box<(PortDeclaration, Symbol)>),
     NonPortModuleItem(Box<NonPortModuleItem>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ModuleOrGenerateItem {
     Parameter(Box<ModuleOrGenerateItemParameter>),
     Gate(Box<ModuleOrGenerateItemGate>),
@@ -73,32 +75,32 @@ pub enum ModuleOrGenerateItem {
     ModuleItem(Box<ModuleOrGenerateItemModuleItem>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleOrGenerateItemParameter {
     pub nodes: (Vec<AttributeInstance>, ParameterOverride),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleOrGenerateItemGate {
     pub nodes: (Vec<AttributeInstance>, GateInstantiation),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleOrGenerateItemUdp {
     pub nodes: (Vec<AttributeInstance>, UdpInstantiation),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleOrGenerateItemModule {
     pub nodes: (Vec<AttributeInstance>, ModuleInstantiation),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleOrGenerateItemModuleItem {
     pub nodes: (Vec<AttributeInstance>, ModuleCommonItem),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ModuleOrGenerateItemDeclaration {
     PackageOrGenerateItemDeclaration(Box<PackageOrGenerateItemDeclaration>),
     GenvarDeclaration(Box<GenvarDeclaration>),
@@ -107,17 +109,17 @@ pub enum ModuleOrGenerateItemDeclaration {
     Disable(Box<ModuleOrGenerateItemDeclarationDisable>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleOrGenerateItemDeclarationClocking {
     pub nodes: (Keyword, Keyword, ClockingIdentifier, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleOrGenerateItemDeclarationDisable {
     pub nodes: (Keyword, Keyword, Keyword, ExpressionOrDist, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum NonPortModuleItem {
     GenerateRegion(Box<GenerateRegion>),
     ModuleOrGenerateItem(Box<ModuleOrGenerateItem>),
@@ -129,23 +131,23 @@ pub enum NonPortModuleItem {
     TimeunitsDeclaration(Box<TimeunitsDeclaration>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NonPortModuleItemSpecparam {
     pub nodes: (Vec<AttributeInstance>, SpecparamDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ParameterOverride {
     pub nodes: (Keyword, ListOfDefparamAssignments, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BindDirective {
     Scope(Box<BindDirectiveScope>),
     Instance(Box<BindDirectiveInstance>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BindDirectiveScope {
     pub nodes: (
         Keyword,
@@ -155,28 +157,28 @@ pub struct BindDirectiveScope {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BindDirectiveInstance {
     pub nodes: (Keyword, BindTargetInstance, BindInstantiation),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BindTargetScope {
     ModuleIdentifier(Box<ModuleIdentifier>),
     InterfaceIdentifier(Box<InterfaceIdentifier>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BindTargetInstance {
     pub nodes: (HierarchicalIdentifier, ConstantBitSelect),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BindTargetInstanceList {
     pub nodes: (List<Symbol, BindTargetInstance>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BindInstantiation {
     ProgramInstantiation(Box<ProgramInstantiation>),
     ModuleInstantiation(Box<ModuleInstantiation>),

@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ConfigDeclaration {
     pub nodes: (
         Keyword,
@@ -16,7 +18,7 @@ pub struct ConfigDeclaration {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DesignStatement {
     pub nodes: (
         Keyword,
@@ -25,7 +27,7 @@ pub struct DesignStatement {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ConfigRuleStatement {
     Default(Box<ConfigRuleStatementDefault>),
     InstLib(Box<ConfigRuleStatementInstLib>),
@@ -34,64 +36,64 @@ pub enum ConfigRuleStatement {
     CellUse(Box<ConfigRuleStatementCellUse>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ConfigRuleStatementDefault {
     pub nodes: (DefaultClause, LiblistClause, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ConfigRuleStatementInstLib {
     pub nodes: (InstClause, LiblistClause, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ConfigRuleStatementInstUse {
     pub nodes: (InstClause, UseClause, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ConfigRuleStatementCellLib {
     pub nodes: (CellClause, LiblistClause, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ConfigRuleStatementCellUse {
     pub nodes: (CellClause, UseClause, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DefaultClause {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct InstClause {
     pub nodes: (Keyword, InstName),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct InstName {
     pub nodes: (TopmoduleIdentifier, Vec<(Symbol, InstanceIdentifier)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CellClause {
     pub nodes: (Keyword, Option<(LibraryIdentifier, Symbol)>, CellIdentifier),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LiblistClause {
     pub nodes: (Keyword, Vec<LibraryIdentifier>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum UseClause {
     Cell(Box<UseClauseCell>),
     Named(Box<UseClauseNamed>),
     CellNamed(Box<UseClauseCellNamed>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct UseClauseCell {
     pub nodes: (
         Keyword,
@@ -101,7 +103,7 @@ pub struct UseClauseCell {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct UseClauseNamed {
     pub nodes: (
         Keyword,
@@ -110,7 +112,7 @@ pub struct UseClauseNamed {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct UseClauseCellNamed {
     pub nodes: (
         Keyword,
@@ -121,7 +123,7 @@ pub struct UseClauseCellNamed {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Config {
     pub nodes: (Keyword,),
 }

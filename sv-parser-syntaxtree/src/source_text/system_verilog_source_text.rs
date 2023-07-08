@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SourceText {
     pub nodes: (
         Vec<WhiteSpace>,
@@ -11,7 +13,7 @@ pub struct SourceText {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum Description {
     ResetallCompilerDirective(Box<ResetallCompilerDirective>),
     ModuleDeclaration(Box<ModuleDeclaration>),
@@ -25,17 +27,17 @@ pub enum Description {
     ConfigDeclaration(Box<ConfigDeclaration>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DescriptionPackageItem {
     pub nodes: (Vec<AttributeInstance>, PackageItem),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DescriptionBindDirective {
     pub nodes: (Vec<AttributeInstance>, BindDirective),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleNonansiHeader {
     pub nodes: (
         Vec<AttributeInstance>,
@@ -49,7 +51,7 @@ pub struct ModuleNonansiHeader {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleAnsiHeader {
     pub nodes: (
         Vec<AttributeInstance>,
@@ -63,7 +65,7 @@ pub struct ModuleAnsiHeader {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ModuleDeclaration {
     Nonansi(Box<ModuleDeclarationNonansi>),
     Ansi(Box<ModuleDeclarationAnsi>),

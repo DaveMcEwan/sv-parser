@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ModuleInstantiation {
     pub nodes: (
         ModuleIdentifier,
@@ -12,75 +14,75 @@ pub struct ModuleInstantiation {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ParameterValueAssignment {
     pub nodes: (Symbol, Paren<Option<ListOfParameterAssignments>>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ListOfParameterAssignments {
     Ordered(Box<ListOfParameterAssignmentsOrdered>),
     Named(Box<ListOfParameterAssignmentsNamed>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ListOfParameterAssignmentsOrdered {
     pub nodes: (List<Symbol, OrderedParameterAssignment>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ListOfParameterAssignmentsNamed {
     pub nodes: (List<Symbol, NamedParameterAssignment>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct OrderedParameterAssignment {
     pub nodes: (ParamExpression,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NamedParameterAssignment {
     pub nodes: (Symbol, ParameterIdentifier, Paren<Option<ParamExpression>>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct HierarchicalInstance {
     pub nodes: (NameOfInstance, Paren<Option<ListOfPortConnections>>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NameOfInstance {
     pub nodes: (InstanceIdentifier, Vec<UnpackedDimension>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ListOfPortConnections {
     Ordered(Box<ListOfPortConnectionsOrdered>),
     Named(Box<ListOfPortConnectionsNamed>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ListOfPortConnectionsOrdered {
     pub nodes: (List<Symbol, OrderedPortConnection>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ListOfPortConnectionsNamed {
     pub nodes: (List<Symbol, NamedPortConnection>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct OrderedPortConnection {
     pub nodes: (Vec<AttributeInstance>, Option<Expression>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum NamedPortConnection {
     Identifier(Box<NamedPortConnectionIdentifier>),
     Asterisk(Box<NamedPortConnectionAsterisk>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NamedPortConnectionIdentifier {
     pub nodes: (
         Vec<AttributeInstance>,
@@ -90,7 +92,7 @@ pub struct NamedPortConnectionIdentifier {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NamedPortConnectionAsterisk {
     pub nodes: (Vec<AttributeInstance>, Symbol),
 }

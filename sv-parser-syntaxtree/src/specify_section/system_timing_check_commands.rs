@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum SystemTimingCheck {
     SetupTimingCheck(Box<SetupTimingCheck>),
     HoldTimingCheck(Box<HoldTimingCheck>),
@@ -18,7 +20,7 @@ pub enum SystemTimingCheck {
     NochangeTimingCheck(Box<NochangeTimingCheck>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SetupTimingCheck {
     pub nodes: (
         Keyword,
@@ -34,7 +36,7 @@ pub struct SetupTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct HoldTimingCheck {
     pub nodes: (
         Keyword,
@@ -50,7 +52,7 @@ pub struct HoldTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SetupholdTimingCheck {
     pub nodes: (
         Keyword,
@@ -84,7 +86,7 @@ pub struct SetupholdTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct RecoveryTimingCheck {
     pub nodes: (
         Keyword,
@@ -100,7 +102,7 @@ pub struct RecoveryTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct RemovalTimingCheck {
     pub nodes: (
         Keyword,
@@ -116,7 +118,7 @@ pub struct RemovalTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct RecremTimingCheck {
     pub nodes: (
         Keyword,
@@ -150,7 +152,7 @@ pub struct RecremTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SkewTimingCheck {
     pub nodes: (
         Keyword,
@@ -166,7 +168,7 @@ pub struct SkewTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TimeskewTimingCheck {
     pub nodes: (
         Keyword,
@@ -190,7 +192,7 @@ pub struct TimeskewTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct FullskewTimingCheck {
     pub nodes: (
         Keyword,
@@ -216,7 +218,7 @@ pub struct FullskewTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PeriodTimingCheck {
     pub nodes: (
         Keyword,
@@ -230,7 +232,7 @@ pub struct PeriodTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct WidthTimingCheck {
     pub nodes: (
         Keyword,
@@ -246,7 +248,7 @@ pub struct WidthTimingCheck {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NochangeTimingCheck {
     pub nodes: (
         Keyword,

@@ -1,13 +1,15 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CheckerPortList {
     pub nodes: (List<Symbol, CheckerPortItem>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CheckerPortItem {
     pub nodes: (
         Vec<AttributeInstance>,
@@ -19,13 +21,13 @@ pub struct CheckerPortItem {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CheckerPortDirection {
     Input(Box<Keyword>),
     Output(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CheckerOrGenerateItem {
     CheckerOrGenerateItemDeclaration(Box<CheckerOrGenerateItemDeclaration>),
     InitialConstruct(Box<InitialConstruct>),
@@ -36,7 +38,7 @@ pub enum CheckerOrGenerateItem {
     CheckerGenerateItem(Box<CheckerGenerateItem>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CheckerOrGenerateItemDeclaration {
     Data(Box<CheckerOrGenerateItemDeclarationData>),
     FunctionDeclaration(Box<FunctionDeclaration>),
@@ -50,27 +52,27 @@ pub enum CheckerOrGenerateItemDeclaration {
     Empty(Box<Symbol>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CheckerOrGenerateItemDeclarationData {
     pub nodes: (Option<Rand>, DataDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Rand {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CheckerOrGenerateItemDeclarationClocking {
     pub nodes: (Keyword, Keyword, ClockingIdentifier, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CheckerOrGenerateItemDeclarationDisable {
     pub nodes: (Keyword, Keyword, Keyword, ExpressionOrDist, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CheckerGenerateItem {
     LoopGenerateConstruct(Box<LoopGenerateConstruct>),
     ConditionalGenerateConstruct(Box<ConditionalGenerateConstruct>),

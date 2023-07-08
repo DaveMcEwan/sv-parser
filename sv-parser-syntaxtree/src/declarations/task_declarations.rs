@@ -1,19 +1,21 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TaskDeclaration {
     pub nodes: (Keyword, Option<Lifetime>, TaskBodyDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum TaskBodyDeclaration {
     WithoutPort(Box<TaskBodyDeclarationWithoutPort>),
     WithPort(Box<TaskBodyDeclarationWithPort>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TaskBodyDeclarationWithoutPort {
     pub nodes: (
         Option<InterfaceIdentifierOrClassScope>,
@@ -26,7 +28,7 @@ pub struct TaskBodyDeclarationWithoutPort {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TaskBodyDeclarationWithPort {
     pub nodes: (
         Option<InterfaceIdentifierOrClassScope>,
@@ -40,18 +42,18 @@ pub struct TaskBodyDeclarationWithPort {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum TfItemDeclaration {
     BlockItemDeclaration(Box<BlockItemDeclaration>),
     TfPortDeclaration(Box<TfPortDeclaration>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TfPortList {
     pub nodes: (List<Symbol, TfPortItem>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TfPortItem {
     pub nodes: (
         Vec<AttributeInstance>,
@@ -66,13 +68,13 @@ pub struct TfPortItem {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum TfPortDirection {
     PortDirection(Box<PortDirection>),
     ConstRef(Box<(Keyword, Keyword)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TfPortDeclaration {
     pub nodes: (
         Vec<AttributeInstance>,
@@ -84,7 +86,7 @@ pub struct TfPortDeclaration {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TaskPrototype {
     pub nodes: (Keyword, TaskIdentifier, Option<Paren<Option<TfPortList>>>),
 }

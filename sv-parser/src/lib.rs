@@ -4,6 +4,7 @@ use nom_greedyerror::error_position;
 use std::fmt;
 use std::hash::BuildHasher;
 use std::path::{Path, PathBuf};
+use serde::{Serialize, Deserialize};
 pub use sv_parser_error::Error;
 use sv_parser_parser::{
     lib_parser, lib_parser_incomplete, sv_parser, sv_parser_incomplete, Span, SpanInfo,
@@ -13,6 +14,7 @@ pub use sv_parser_pp::preprocess::{
 };
 pub use sv_parser_syntaxtree::*;
 
+#[derive(Serialize, Deserialize)]
 pub struct SyntaxTree {
     node: AnyNode,
     text: PreprocessedText,

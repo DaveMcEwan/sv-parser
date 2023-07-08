@@ -19,6 +19,7 @@ tag = false
 
 [dependencies]
 sv-parser-macros = {version = "^0.13.1", path = "../sv-parser-macros"}
+serde = { version="1", features = ["derive"] }
 
 [build-dependencies]
 regex   = "1"

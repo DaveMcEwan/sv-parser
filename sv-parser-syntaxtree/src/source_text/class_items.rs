@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ClassItem {
     Property(Box<ClassItemProperty>),
     Method(Box<ClassItemMethod>),
@@ -14,43 +16,43 @@ pub enum ClassItem {
     Empty(Box<Symbol>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassItemProperty {
     pub nodes: (Vec<AttributeInstance>, ClassProperty),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassItemMethod {
     pub nodes: (Vec<AttributeInstance>, ClassMethod),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassItemConstraint {
     pub nodes: (Vec<AttributeInstance>, ClassConstraint),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassItemDeclaration {
     pub nodes: (Vec<AttributeInstance>, ClassDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassItemCovergroup {
     pub nodes: (Vec<AttributeInstance>, CovergroupDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ClassProperty {
     NonConst(Box<ClassPropertyNonConst>),
     Const(Box<ClassPropertyConst>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassPropertyNonConst {
     pub nodes: (Vec<PropertyQualifier>, DataDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassPropertyConst {
     pub nodes: (
         Keyword,
@@ -62,13 +64,13 @@ pub struct ClassPropertyConst {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ClassPropertyConstExpression {
     ConstantExpression(Box<ConstantExpression>),
     ClassNew(Box<ClassNew>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ClassMethod {
     Task(Box<ClassMethodTask>),
     Function(Box<ClassMethodFunction>),
@@ -78,17 +80,17 @@ pub enum ClassMethod {
     ExternConstructor(Box<ClassMethodExternConstructor>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassMethodTask {
     pub nodes: (Vec<MethodQualifier>, TaskDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassMethodFunction {
     pub nodes: (Vec<MethodQualifier>, FunctionDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassMethodPureVirtual {
     pub nodes: (
         Keyword,
@@ -99,65 +101,65 @@ pub struct ClassMethodPureVirtual {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassMethodExternMethod {
     pub nodes: (Keyword, Vec<MethodQualifier>, MethodPrototype, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassMethodConstructor {
     pub nodes: (Vec<MethodQualifier>, ClassConstructorDeclaration),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassMethodExternConstructor {
     pub nodes: (Keyword, Vec<MethodQualifier>, ClassConstructorPrototype),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassConstructorPrototype {
     pub nodes: (Keyword, Keyword, Option<Paren<Option<TfPortList>>>, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ClassConstraint {
     ConstraintPrototype(Box<ConstraintPrototype>),
     ConstraintDeclaration(Box<ConstraintDeclaration>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ClassItemQualifier {
     Static(Box<Keyword>),
     Protected(Box<Keyword>),
     Local(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum PropertyQualifier {
     RandomQualifier(Box<RandomQualifier>),
     ClassItemQualifier(Box<ClassItemQualifier>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum RandomQualifier {
     Rand(Box<Keyword>),
     Randc(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum MethodQualifier {
     Virtual(Box<Keyword>),
     PureVirtual(Box<(Keyword, Keyword)>),
     ClassItemQualifier(Box<ClassItemQualifier>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum MethodPrototype {
     TaskPrototype(Box<TaskPrototype>),
     FunctionPrototype(Box<FunctionPrototype>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassConstructorDeclaration {
     pub nodes: (
         Keyword,
@@ -179,7 +181,7 @@ pub struct ClassConstructorDeclaration {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct New {
     pub nodes: (Keyword,),
 }

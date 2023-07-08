@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CastingType {
     SimpleType(Box<SimpleType>),
     ConstantPrimary(Box<ConstantPrimary>),
@@ -11,7 +13,7 @@ pub enum CastingType {
     Const(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum DataType {
     Vector(Box<DataTypeVector>),
     Atom(Box<DataTypeAtom>),
@@ -28,17 +30,17 @@ pub enum DataType {
     TypeReference(Box<TypeReference>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DataTypeVector {
     pub nodes: (IntegerVectorType, Option<Signing>, Vec<PackedDimension>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DataTypeAtom {
     pub nodes: (IntegerAtomType, Option<Signing>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DataTypeStructUnion {
     pub nodes: (
         StructUnion,
@@ -48,12 +50,12 @@ pub struct DataTypeStructUnion {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Packed {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DataTypeEnum {
     pub nodes: (
         Keyword,
@@ -63,7 +65,7 @@ pub struct DataTypeEnum {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DataTypeVirtual {
     pub nodes: (
         Keyword,
@@ -74,12 +76,12 @@ pub struct DataTypeVirtual {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Interface {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DataTypeType {
     pub nodes: (
         Option<PackageScopeOrClassScope>,
@@ -88,40 +90,40 @@ pub struct DataTypeType {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum DataTypeOrImplicit {
     DataType(Box<DataType>),
     ImplicitDataType(Box<ImplicitDataType>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ImplicitDataType {
     pub nodes: (Option<Signing>, Vec<PackedDimension>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum EnumBaseType {
     Atom(Box<EnumBaseTypeAtom>),
     Vector(Box<EnumBaseTypeVector>),
     Type(Box<EnumBaseTypeType>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct EnumBaseTypeAtom {
     pub nodes: (IntegerAtomType, Option<Signing>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct EnumBaseTypeVector {
     pub nodes: (IntegerVectorType, Option<Signing>, Option<PackedDimension>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct EnumBaseTypeType {
     pub nodes: (TypeIdentifier, Option<PackedDimension>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct EnumNameDeclaration {
     pub nodes: (
         EnumIdentifier,
@@ -130,12 +132,12 @@ pub struct EnumNameDeclaration {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassScope {
     pub nodes: (ClassType, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ClassType {
     pub nodes: (
         PsClassIdentifier,
@@ -144,13 +146,13 @@ pub struct ClassType {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum IntegerType {
     IntegerVectorType(Box<IntegerVectorType>),
     IntegerAtomType(Box<IntegerAtomType>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum IntegerAtomType {
     Byte(Box<Keyword>),
     Shortint(Box<Keyword>),
@@ -160,21 +162,21 @@ pub enum IntegerAtomType {
     Time(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum IntegerVectorType {
     Bit(Box<Keyword>),
     Logic(Box<Keyword>),
     Reg(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum NonIntegerType {
     Shortreal(Box<Keyword>),
     Real(Box<Keyword>),
     Realtime(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum NetType {
     Supply0(Box<Keyword>),
     Supply1(Box<Keyword>),
@@ -190,46 +192,46 @@ pub enum NetType {
     Wor(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum NetPortType {
     DataType(Box<NetPortTypeDataType>),
     NetTypeIdentifier(Box<NetTypeIdentifier>),
     Interconnect(Box<NetPortTypeInterconnect>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NetPortTypeDataType {
     pub nodes: (Option<NetType>, DataTypeOrImplicit),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NetPortTypeInterconnect {
     pub nodes: (Keyword, ImplicitDataType),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct VariablePortType {
     pub nodes: (VarDataType,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum VarDataType {
     DataType(Box<DataType>),
     Var(Box<VarDataTypeVar>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct VarDataTypeVar {
     pub nodes: (Keyword, DataTypeOrImplicit),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum Signing {
     Signed(Box<Keyword>),
     Unsigned(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum SimpleType {
     IntegerType(Box<IntegerType>),
     NonIntegerType(Box<NonIntegerType>),
@@ -237,7 +239,7 @@ pub enum SimpleType {
     PsParameterIdentifier(Box<PsParameterIdentifier>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct StructUnionMember {
     pub nodes: (
         Vec<AttributeInstance>,
@@ -248,31 +250,31 @@ pub struct StructUnionMember {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum DataTypeOrVoid {
     DataType(Box<DataType>),
     Void(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum StructUnion {
     Struct(Box<Keyword>),
     Union(Box<Keyword>),
     UnionTagged(Box<(Keyword, Keyword)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum TypeReference {
     Expression(Box<TypeReferenceExpression>),
     DataType(Box<TypeReferenceDataType>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TypeReferenceExpression {
     pub nodes: (Keyword, Paren<Expression>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TypeReferenceDataType {
     pub nodes: (Keyword, Paren<DataType>),
 }

@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CovergroupDeclaration {
     pub nodes: (
         Keyword,
@@ -16,34 +18,34 @@ pub struct CovergroupDeclaration {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CoverageSpecOrOption {
     Spec(Box<CoverageSpecOrOptionSpec>),
     Option(Box<CoverageSpecOrOptionOption>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CoverageSpecOrOptionSpec {
     pub nodes: (Vec<AttributeInstance>, CoverageSpec),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CoverageSpecOrOptionOption {
     pub nodes: (Vec<AttributeInstance>, CoverageOption, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CoverageOption {
     Option(Box<CoverageOptionOption>),
     TypeOption(Box<CoverageOptionTypeOption>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CoverageOptionOption {
     pub nodes: (Keyword, Symbol, MemberIdentifier, Symbol, Expression),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CoverageOptionTypeOption {
     pub nodes: (
         Keyword,
@@ -54,70 +56,70 @@ pub struct CoverageOptionTypeOption {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CoverageSpec {
     CoverPoint(Box<CoverPoint>),
     CoverCross(Box<CoverCross>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CoverageEvent {
     ClockingEvent(Box<ClockingEvent>),
     Sample(Box<CoverageEventSample>),
     At(Box<CoverageEventAt>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CoverageEventSample {
     pub nodes: (Keyword, Keyword, Keyword, Paren<Option<TfPortList>>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CoverageEventAt {
     pub nodes: (Symbol, Paren<BlockEventExpression>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BlockEventExpression {
     Or(Box<BlockEventExpressionOr>),
     Begin(Box<BlockEventExpressionBegin>),
     End(Box<BlockEventExpressionEnd>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BlockEventExpressionOr {
     pub nodes: (BlockEventExpression, Keyword, BlockEventExpression),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BlockEventExpressionBegin {
     pub nodes: (Keyword, HierarchicalBtfIdentifier),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BlockEventExpressionEnd {
     pub nodes: (Keyword, HierarchicalBtfIdentifier),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum HierarchicalBtfIdentifier {
     HierarchicalTfIdentifier(Box<HierarchicalTfIdentifier>),
     HierarchicalBlockIdentifier(Box<HierarchicalBlockIdentifier>),
     Method(Box<HierarchicalBtfIdentifierMethod>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct HierarchicalBtfIdentifierMethod {
     pub nodes: (Option<HierarchicalIdentifierOrClassScope>, MethodIdentifier),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum HierarchicalIdentifierOrClassScope {
     HierarchicalIdentifier(Box<(HierarchicalIdentifier, Symbol)>),
     ClassScope(Box<ClassScope>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CoverPoint {
     pub nodes: (
         Option<(Option<DataTypeOrImplicit>, CoverPointIdentifier, Symbol)>,
@@ -128,18 +130,18 @@ pub struct CoverPoint {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BinsOrEmpty {
     NonEmpty(Box<BinsOrEmptyNonEmpty>),
     Empty(Box<Symbol>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsOrEmptyNonEmpty {
     pub nodes: (Brace<(Vec<AttributeInstance>, Vec<(BinsOrOptions, Symbol)>)>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BinsOrOptions {
     CoverageOption(Box<CoverageOption>),
     Covergroup(Box<BinsOrOptionsCovergroup>),
@@ -150,7 +152,7 @@ pub enum BinsOrOptions {
     DefaultSequence(Box<BinsOrOptionsDefaultSequence>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsOrOptionsCovergroup {
     pub nodes: (
         Option<Wildcard>,
@@ -164,12 +166,12 @@ pub struct BinsOrOptionsCovergroup {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Wildcard {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsOrOptionsCoverPoint {
     pub nodes: (
         Option<Wildcard>,
@@ -184,7 +186,7 @@ pub struct BinsOrOptionsCoverPoint {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsOrOptionsSetCovergroup {
     pub nodes: (
         Option<Wildcard>,
@@ -197,7 +199,7 @@ pub struct BinsOrOptionsSetCovergroup {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsOrOptionsTransList {
     pub nodes: (
         Option<Wildcard>,
@@ -210,7 +212,7 @@ pub struct BinsOrOptionsTransList {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsOrOptionsDefault {
     pub nodes: (
         BinsKeyword,
@@ -222,7 +224,7 @@ pub struct BinsOrOptionsDefault {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsOrOptionsDefaultSequence {
     pub nodes: (
         BinsKeyword,
@@ -234,24 +236,24 @@ pub struct BinsOrOptionsDefaultSequence {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BinsKeyword {
     Bins(Box<Keyword>),
     IllegalBins(Box<Keyword>),
     IgnoreBins(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TransList {
     pub nodes: (List<Symbol, Paren<TransSet>>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TransSet {
     pub nodes: (List<Symbol, TransRangeList>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum TransRangeList {
     TransItem(Box<TransItem>),
     Asterisk(Box<TransRangeListAsterisk>),
@@ -259,38 +261,38 @@ pub enum TransRangeList {
     Equal(Box<TransRangeListEqual>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TransRangeListAsterisk {
     pub nodes: (TransItem, Bracket<(Symbol, RepeatRange)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TransRangeListArrow {
     pub nodes: (TransItem, Bracket<(Symbol, RepeatRange)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TransRangeListEqual {
     pub nodes: (TransItem, Bracket<(Symbol, RepeatRange)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TransItem {
     pub nodes: (CovergroupRangeList,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum RepeatRange {
     CovergroupExpression(Box<CovergroupExpression>),
     Binary(Box<RepeatRangeBinary>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct RepeatRangeBinary {
     pub nodes: (CovergroupExpression, Symbol, CovergroupExpression),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CoverCross {
     pub nodes: (
         Option<(CrossIdentifier, Symbol)>,
@@ -301,51 +303,51 @@ pub struct CoverCross {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ListOfCrossItems {
     pub nodes: (CrossItem, Symbol, List<Symbol, CrossItem>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CrossItem {
     CoverPointIdentifier(Box<CoverPointIdentifier>),
     VariableIdentifier(Box<VariableIdentifier>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CrossBody {
     NonEmpty(Box<CrossBodyNonEmpty>),
     Empty(Box<Symbol>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CrossBodyNonEmpty {
     pub nodes: (Brace<Vec<CrossBodyItem>>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CrossBodyItem {
     FunctionDeclaration(Box<FunctionDeclaration>),
     BinsSelectionOrOption(Box<(BinsSelectionOrOption, Symbol)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BinsSelectionOrOption {
     Coverage(Box<BinsSelectionOrOptionCoverage>),
     Bins(Box<BinsSelectionOrOptionBins>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsSelectionOrOptionCoverage {
     pub nodes: (Vec<AttributeInstance>, CoverageOption),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsSelectionOrOptionBins {
     pub nodes: (Vec<AttributeInstance>, BinsSelection),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsSelection {
     pub nodes: (
         BinsKeyword,
@@ -356,7 +358,7 @@ pub struct BinsSelection {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum SelectExpression {
     SelectCondition(Box<SelectCondition>),
     Not(Box<SelectExpressionNot>),
@@ -368,27 +370,27 @@ pub enum SelectExpression {
     CrossSet(Box<SelectExpressionCrossSet>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SelectExpressionNot {
     pub nodes: (Symbol, SelectCondition),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SelectExpressionAnd {
     pub nodes: (SelectExpression, Symbol, SelectExpression),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SelectExpressionOr {
     pub nodes: (SelectExpression, Symbol, SelectExpression),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SelectExpressionParen {
     pub nodes: (Paren<SelectExpression>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SelectExpressionWith {
     pub nodes: (
         SelectExpression,
@@ -398,7 +400,7 @@ pub struct SelectExpressionWith {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SelectExpressionCrossSet {
     pub nodes: (
         CrossSetExpression,
@@ -406,7 +408,7 @@ pub struct SelectExpressionCrossSet {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SelectCondition {
     pub nodes: (
         Keyword,
@@ -415,54 +417,54 @@ pub struct SelectCondition {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum BinsExpression {
     VariableIdentifier(Box<VariableIdentifier>),
     CoverPoint(Box<BinsExpressionCoverPoint>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct BinsExpressionCoverPoint {
     pub nodes: (CoverPointIdentifier, Option<(Symbol, BinIdentifier)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CovergroupRangeList {
     pub nodes: (List<Symbol, CovergroupValueRange>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CovergroupValueRange {
     CovergroupExpression(Box<CovergroupExpression>),
     Binary(Box<CovergroupValueRangeBinary>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CovergroupValueRangeBinary {
     pub nodes: (Bracket<(CovergroupExpression, Symbol, CovergroupExpression)>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct WithCovergroupExpression {
     pub nodes: (CovergroupExpression,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SetCovergroupExpression {
     pub nodes: (CovergroupExpression,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IntegerCovergroupExpression {
     pub nodes: (CovergroupExpression,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CrossSetExpression {
     pub nodes: (CovergroupExpression,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CovergroupExpression {
     pub nodes: (Expression,),
 }

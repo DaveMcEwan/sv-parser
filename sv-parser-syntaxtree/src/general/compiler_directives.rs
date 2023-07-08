@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum CompilerDirective {
     ResetallCompilerDirective(Box<ResetallCompilerDirective>),
     IncludeCompilerDirective(Box<IncludeCompilerDirective>),
@@ -24,74 +26,74 @@ pub enum CompilerDirective {
     EndkeywordsDirective(Box<EndkeywordsDirective>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ResetallCompilerDirective {
     pub nodes: (Symbol, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum IncludeCompilerDirective {
     DoubleQuote(Box<IncludeCompilerDirectiveDoubleQuote>),
     AngleBracket(Box<IncludeCompilerDirectiveAngleBracket>),
     TextMacroUsage(Box<IncludeCompilerDirectiveTextMacroUsage>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IncludeCompilerDirectiveDoubleQuote {
     pub nodes: (Symbol, Keyword, StringLiteral),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IncludeCompilerDirectiveAngleBracket {
     pub nodes: (Symbol, Keyword, AngleBracketLiteral),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IncludeCompilerDirectiveTextMacroUsage {
     pub nodes: (Symbol, Keyword, TextMacroUsage),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct AngleBracketLiteral {
     pub nodes: (Locate, Vec<WhiteSpace>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TextMacroDefinition {
     pub nodes: (Symbol, Keyword, TextMacroName, Option<MacroText>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TextMacroName {
     pub nodes: (TextMacroIdentifier, Option<Paren<ListOfFormalArguments>>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ListOfFormalArguments {
     pub nodes: (List<Symbol, FormalArgument>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct FormalArgument {
     pub nodes: (SimpleIdentifier, Option<(Symbol, DefaultText)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TextMacroIdentifier {
     pub nodes: (Identifier,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct MacroText {
     pub nodes: (Locate,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DefaultText {
     pub nodes: (Locate,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TextMacroUsage {
     pub nodes: (
         Symbol,
@@ -100,33 +102,33 @@ pub struct TextMacroUsage {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ListOfActualArguments {
     pub nodes: (List<Symbol, Option<ActualArgument>>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ActualArgument {
     pub nodes: (Locate,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct UndefineCompilerDirective {
     pub nodes: (Symbol, Keyword, TextMacroIdentifier),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct UndefineallCompilerDirective {
     pub nodes: (Symbol, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ConditionalCompilerDirective {
     IfdefDirective(Box<IfdefDirective>),
     IfndefDirective(Box<IfndefDirective>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IfdefDirective {
     pub nodes: (
         Symbol,
@@ -140,7 +142,7 @@ pub struct IfdefDirective {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IfndefDirective {
     pub nodes: (
         Symbol,
@@ -154,27 +156,27 @@ pub struct IfndefDirective {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IfdefGroupOfLines {
     pub nodes: (Vec<SourceDescription>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct IfndefGroupOfLines {
     pub nodes: (Vec<SourceDescription>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ElsifGroupOfLines {
     pub nodes: (Vec<SourceDescription>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ElseGroupOfLines {
     pub nodes: (Vec<SourceDescription>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum SourceDescription {
     Comment(Box<Comment>),
     StringLiteral(Box<StringLiteral>),
@@ -183,12 +185,12 @@ pub enum SourceDescription {
     EscapedIdentifier(Box<EscapedIdentifier>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SourceDescriptionNotDirective {
     pub nodes: (Locate,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TimescaleCompilerDirective {
     pub nodes: (
         Symbol,
@@ -201,37 +203,37 @@ pub struct TimescaleCompilerDirective {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DefaultNettypeCompilerDirective {
     pub nodes: (Symbol, Keyword, DefaultNettypeValue),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DefaultNettypeValue {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct UnconnectedDriveCompilerDirective {
     pub nodes: (Symbol, Keyword, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NounconnectedDriveCompilerDirective {
     pub nodes: (Symbol, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct CelldefineDriveCompilerDirective {
     pub nodes: (Symbol, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct EndcelldefineDriveCompilerDirective {
     pub nodes: (Symbol, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Pragma {
     pub nodes: (
         Symbol,
@@ -241,24 +243,24 @@ pub struct Pragma {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PragmaName {
     pub nodes: (SimpleIdentifier,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum PragmaExpression {
     PragmaKeyword(Box<PragmaKeyword>),
     Assignment(Box<PragmaExpressionAssignment>),
     PragmaValue(Box<PragmaValue>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PragmaExpressionAssignment {
     pub nodes: (PragmaKeyword, Symbol, PragmaValue),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum PragmaValue {
     Paren(Box<PragmaValueParen>),
     Number(Box<Number>),
@@ -266,42 +268,42 @@ pub enum PragmaValue {
     Identifier(Box<Identifier>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PragmaValueParen {
     pub nodes: (Paren<List<Symbol, PragmaExpression>>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PragmaKeyword {
     pub nodes: (SimpleIdentifier,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LineCompilerDirective {
     pub nodes: (Symbol, Keyword, Number, StringLiteral, Level),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PositionCompilerDirective {
     pub nodes: (Symbol, Keyword),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Level {
     pub nodes: (Symbol,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct KeywordsDirective {
     pub nodes: (Symbol, Keyword, Symbol, VersionSpecifier, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct VersionSpecifier {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct EndkeywordsDirective {
     pub nodes: (Symbol, Keyword),
 }

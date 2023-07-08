@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum DataDeclaration {
     Variable(Box<DataDeclarationVariable>),
     TypeDeclaration(Box<TypeDeclaration>),
@@ -10,7 +12,7 @@ pub enum DataDeclaration {
     NetTypeDeclaration(Box<NetTypeDeclaration>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct DataDeclarationVariable {
     pub nodes: (
         Option<Const>,
@@ -22,61 +24,61 @@ pub struct DataDeclarationVariable {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct Const {
     pub nodes: (Keyword,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PackageImportDeclaration {
     pub nodes: (Keyword, List<Symbol, PackageImportItem>, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum PackageImportItem {
     Identifier(Box<PackageImportItemIdentifier>),
     Asterisk(Box<PackageImportItemAsterisk>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PackageImportItemIdentifier {
     pub nodes: (PackageIdentifier, Symbol, Identifier),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PackageImportItemAsterisk {
     pub nodes: (PackageIdentifier, Symbol, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum PackageExportDeclaration {
     Asterisk(Box<PackageExportDeclarationAsterisk>),
     Item(Box<PackageExportDeclarationItem>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PackageExportDeclarationAsterisk {
     pub nodes: (Keyword, Symbol, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct PackageExportDeclarationItem {
     pub nodes: (Keyword, List<Symbol, PackageImportItem>, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct GenvarDeclaration {
     pub nodes: (Keyword, ListOfGenvarIdentifiers, Symbol),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum NetDeclaration {
     NetType(Box<NetDeclarationNetType>),
     NetTypeIdentifier(Box<NetDeclarationNetTypeIdentifier>),
     Interconnect(Box<NetDeclarationInterconnect>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NetDeclarationNetType {
     pub nodes: (
         NetType,
@@ -89,19 +91,19 @@ pub struct NetDeclarationNetType {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum Strength {
     Drive(Box<DriveStrength>),
     Charge(Box<ChargeStrength>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum VectorScalar {
     Vectored(Box<Keyword>),
     Scalared(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NetDeclarationNetTypeIdentifier {
     pub nodes: (
         NetTypeIdentifier,
@@ -111,7 +113,7 @@ pub struct NetDeclarationNetTypeIdentifier {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NetDeclarationInterconnect {
     pub nodes: (
         Keyword,
@@ -124,14 +126,14 @@ pub struct NetDeclarationInterconnect {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum TypeDeclaration {
     DataType(Box<TypeDeclarationDataType>),
     Interface(Box<TypeDeclarationInterface>),
     Reserved(Box<TypeDeclarationReserved>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TypeDeclarationDataType {
     pub nodes: (
         Keyword,
@@ -142,7 +144,7 @@ pub struct TypeDeclarationDataType {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TypeDeclarationInterface {
     pub nodes: (
         Keyword,
@@ -155,7 +157,7 @@ pub struct TypeDeclarationInterface {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct TypeDeclarationReserved {
     pub nodes: (
         Keyword,
@@ -165,7 +167,7 @@ pub struct TypeDeclarationReserved {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum TypeDeclarationKeyword {
     Enum(Box<Keyword>),
     Struct(Box<Keyword>),
@@ -174,13 +176,13 @@ pub enum TypeDeclarationKeyword {
     InterfaceClass(Box<(Keyword, Keyword)>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum NetTypeDeclaration {
     DataType(Box<NetTypeDeclarationDataType>),
     NetType(Box<NetTypeDeclarationNetType>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NetTypeDeclarationDataType {
     pub nodes: (
         Keyword,
@@ -191,7 +193,7 @@ pub struct NetTypeDeclarationDataType {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct NetTypeDeclarationNetType {
     pub nodes: (
         Keyword,
@@ -202,7 +204,7 @@ pub struct NetTypeDeclarationNetType {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum Lifetime {
     Static(Box<Keyword>),
     Automatic(Box<Keyword>),

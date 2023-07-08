@@ -1,9 +1,12 @@
+
 #![recursion_limit = "256"]
 #![allow(
     clippy::module_inception,
     clippy::large_enum_variant,
     clippy::type_complexity
 )]
+
+use serde::{Serialize, Deserialize};
 
 pub mod any_node;
 pub mod behavioral_statements;
@@ -34,7 +37,7 @@ pub(crate) use sv_parser_macros::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Copy, Clone, Default, Debug, PartialEq)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Locate {
     pub offset: usize,
     pub line: u32,

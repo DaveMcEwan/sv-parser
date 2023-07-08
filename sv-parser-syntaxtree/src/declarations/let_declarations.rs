@@ -1,8 +1,10 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LetDeclaration {
     pub nodes: (
         Keyword,
@@ -14,17 +16,17 @@ pub struct LetDeclaration {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LetIdentifier {
     pub nodes: (Identifier,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LetPortList {
     pub nodes: (List<Symbol, LetPortItem>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LetPortItem {
     pub nodes: (
         Vec<AttributeInstance>,
@@ -35,13 +37,13 @@ pub struct LetPortItem {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum LetFormalType {
     DataTypeOrImplicit(Box<DataTypeOrImplicit>),
     Untyped(Box<Keyword>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LetExpression {
     pub nodes: (
         Option<PackageScope>,
@@ -50,13 +52,13 @@ pub struct LetExpression {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum LetListOfArguments {
     Ordered(Box<LetListOfArgumentsOrdered>),
     Named(Box<LetListOfArgumentsNamed>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LetListOfArgumentsOrdered {
     pub nodes: (
         List<Symbol, Option<LetActualArg>>,
@@ -64,12 +66,12 @@ pub struct LetListOfArgumentsOrdered {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LetListOfArgumentsNamed {
     pub nodes: (List<Symbol, (Symbol, Identifier, Paren<Option<LetActualArg>>)>,),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct LetActualArg {
     pub nodes: (Expression,),
 }

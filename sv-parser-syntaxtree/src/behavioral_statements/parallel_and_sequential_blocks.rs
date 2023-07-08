@@ -1,19 +1,21 @@
+
+use serde::{Serialize, Deserialize};
 use crate::*;
 
 // -----------------------------------------------------------------------------
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum ActionBlock {
     StatementOrNull(Box<StatementOrNull>),
     Else(Box<ActionBlockElse>),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ActionBlockElse {
     pub nodes: (Option<Statement>, Keyword, StatementOrNull),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct SeqBlock {
     pub nodes: (
         Keyword,
@@ -25,7 +27,7 @@ pub struct SeqBlock {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub struct ParBlock {
     pub nodes: (
         Keyword,
@@ -37,7 +39,7 @@ pub struct ParBlock {
     ),
 }
 
-#[derive(Clone, Debug, PartialEq, Node)]
+#[derive(Clone, Debug, PartialEq, Node, Serialize, Deserialize)]
 pub enum JoinKeyword {
     Join(Box<Keyword>),
     JoinAny(Box<Keyword>),
